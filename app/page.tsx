@@ -1,39 +1,92 @@
+"use client"
+
 import Link from "next/link"
 
-import { siteConfig } from "@/config/site"
-import { buttonVariants } from "@/components/ui/button"
+import { Button } from "@/components/ui/button"
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog"
+import { Chat } from "@/components/chat"
+import Chessboard from "@/components/chessboard"
+import useStore from "@/store/useStore"
 
 export default function IndexPage() {
+  const { clearStore } = useStore()
+
   return (
     <section className="container grid items-center gap-6 pb-8 pt-6 md:py-10">
       <div className="flex max-w-[980px] flex-col items-start gap-2">
         <h1 className="text-3xl font-extrabold leading-tight tracking-tighter sm:text-3xl md:text-5xl lg:text-6xl">
-          Beautifully designed components <br className="hidden sm:inline" />
-          built with Radix UI and Tailwind CSS.
+          Hello, Im Chester
         </h1>
         <p className="max-w-[700px] text-lg text-muted-foreground sm:text-xl">
-          Accessible and customizable components that you can copy and paste
-          into your apps. Free. Open Source. And Next.js 13 Ready.
+          I am a AI bot designed to help you get better at chess.
         </p>
       </div>
       <div className="flex gap-4">
-        <Link
-          href={siteConfig.links.docs}
-          target="_blank"
-          rel="noreferrer"
-          className={buttonVariants({ size: "lg" })}
-        >
-          Documentation
-        </Link>
-        <Link
-          target="_blank"
-          rel="noreferrer"
-          href={siteConfig.links.github}
-          className={buttonVariants({ variant: "outline", size: "lg" })}
-        >
-          GitHub
-        </Link>
+        <Button onClick={clearStore}>
+          <Link target="_blank" href="https://blogr.conceptcodes.dev/chester">
+            Learn More
+          </Link>
+        </Button>
+        <Dialog>
+          <DialogTrigger asChild>
+            <Button variant="secondary">How to</Button>
+          </DialogTrigger>
+          <DialogContent>
+            <DialogHeader>
+              <DialogTitle>Chester Commands</DialogTitle>
+              <DialogDescription>
+                <div className="text-center sm:text-left">
+                  <div className="mt-2">
+                    <ul className="list-inside list-disc space-y-6 text-sm text-gray-700">
+                      <li>
+                        <strong className="text-green-500">/breakdown:</strong> As
+                        a chess coach, I'll provide a detailed breakdown of the
+                        current state of the chess game, considering the
+                        positions of the pieces, potential threats, and tactical
+                        opportunities. For this command, I'll be coaching for
+                        the white pieces.
+                      </li>
+                      <li>
+                        <strong className="text-blue-500">/next-move:</strong>{" "}
+                        I'll scrutinize the present situation on the board and
+                        suggest the most advantageous next move for the white
+                        player. I'll explain the reasoning behind the suggested
+                        move.
+                      </li>
+                      <li>
+                        <strong className="text-orange-500">/mind-reader:</strong>{" "}
+                        In this mode, I'll think like the player and plan out
+                        the next three moves. Each move and its reasoning will
+                        be explained.
+                      </li>
+                      <li>
+                        <strong className="text-red-500">/coach:</strong> Here,
+                        I'll find the best possible move for the black player
+                        and explain the thought process behind the decision.
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </DialogDescription>
+            </DialogHeader>
+          </DialogContent>
+        </Dialog>
       </div>
+      <section className="flex justify-between space-x-7">
+        <div className="w-1/2">
+          <Chat chatId="chatId" />
+        </div>
+        <div className="w-1/2">
+          <Chessboard />
+        </div>
+      </section>
     </section>
   )
 }
