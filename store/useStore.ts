@@ -1,3 +1,4 @@
+import { Ratings } from "@/lib/utils"
 import { mountStoreDevtool } from "simple-zustand-devtools"
 import { create, type StateCreator } from "zustand"
 import { createJSONStorage, persist } from "zustand/middleware"
@@ -8,13 +9,13 @@ export type Move = {
 }
 
 interface State {
-  elo: string
+  elo: Ratings;
   showConfetti: boolean
   aiPlay: boolean
   board: { fen: string; pgn: string }
   nextMove: Move | undefined
   validMoves: Partial<Move>[]
-  setElo: (elo: string) => void
+  setElo: (elo: Ratings) => void
   setBoard: (board: { fen: string; pgn: string }) => void
   setValidMoves: (validMoves: Partial<Move>[]) => void
   setAiPlay: (aiPlay: boolean) => void
@@ -25,7 +26,7 @@ interface State {
 
 const store: StateCreator<State> = persist(
   (set) => ({
-    elo: "100-800",
+    elo: "beginner",
     showConfetti: false,
     aiPlay: false,
     nextMove: undefined,
@@ -39,7 +40,7 @@ const store: StateCreator<State> = persist(
     setBoard: (board) => set({ board }),
     clearStore: () =>
       set({
-        elo: "100-800",
+        elo: "beginner",
         showConfetti: false,
         aiPlay: false,
         nextMove: undefined,

@@ -1,24 +1,24 @@
-import { useCallback, useEffect, useRef, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import useStore, { type Move } from "@/store/useStore"
 import { zodResolver } from "@hookform/resolvers/zod"
-import { Bot, Loader2, UserIcon, RedoIcon } from "lucide-react"
+import { Bot, Loader2, RedoIcon, UserIcon } from "lucide-react"
 import { useForm } from "react-hook-form"
 import * as z from "zod"
-import { cn } from "@/lib/utils"
 
-import { Alert, AlertDescription } from "@/components/ui/alert"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
+import { Ratings, cn } from "@/lib/utils"
+
+import { Alert, AlertDescription } from "./ui/alert"
+import { Button } from "./ui/button"
+import { Form, FormControl, FormField, FormItem, FormMessage } from "./ui/form"
+import { Input } from "./ui/input"
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select"
-import { useToast } from "@/components/ui/use-toast"
-
-import { Form, FormControl, FormField, FormItem, FormMessage } from "./ui/form"
+} from "./ui/select"
+import { useToast } from "./ui/use-toast"
 
 interface ChatProps {
   chatId: string
@@ -33,7 +33,7 @@ async function askQuestion(
   type: string,
   elo: string,
   board: { fen: string; pgn: string },
-  validMoves: Move[]
+  validMoves: Partial<Move>[]
 ) {
   try {
     const response = await fetch(`/api/next-move`, {
@@ -76,7 +76,7 @@ export function Chat({ chatId }: ChatProps) {
       isBot: true,
     },
   ])
-  const [latestCommand, setLatestCommand] = useState("");
+  const [latestCommand, setLatestCommand] = useState("")
 
   const formSchema = z.object({
     request: z.string().nonempty().describe("Request type"),
@@ -94,7 +94,7 @@ export function Chat({ chatId }: ChatProps) {
       onAskQuestion("/opponent")
       setAiPlay(false)
     }
-  }, [aiPlay])
+  }, [aiPlay, setAiPlay])
 
   const onAskQuestion = async (question: string) => {
     setChatInteractions((previousInteractions) => [
@@ -143,7 +143,7 @@ export function Chat({ chatId }: ChatProps) {
 
   const onSubmit = async (data: z.infer<typeof formSchema>) => {
     setLatestCommand(data.request)
-  console.log(latestCommand)
+    console.log(latestCommand)
     await onAskQuestion(data.request)
   }
 
@@ -162,18 +162,17 @@ export function Chat({ chatId }: ChatProps) {
     }
   }
 
-
   return (
     <div className="w-full rounded-lg">
-      <Select onValueChange={(val) => setElo(val)}>
+      <Select onValueChange={(val) => setElo(val as Ratings)}>
         <SelectTrigger className="mb-5 w-full" defaultValue={elo}>
-          <SelectValue placeholder="Rating" />
+          <SelectValue placeholder="Rating" defaultValue={elo} />
         </SelectTrigger>
         <SelectContent defaultValue={elo}>
-          <SelectItem value="100-800">Novice (100-800)</SelectItem>
-          <SelectItem value="800-1500">Intermediate (800-1500)</SelectItem>
-          <SelectItem value="1500-2000">Advanced (1500-2000)</SelectItem>
-          <SelectItem value="2000+">Expert (2000+)</SelectItem>
+          <SelectItem value="beginner">Novice (100-800)</SelectItem>
+          <SelectItem value="intermediate">Intermediate (800-1500)</SelectItem>
+          <SelectItem value="advanced">Advanced (1500-2000)</SelectItem>
+          <SelectItem value="expert">Expert (2000+)</SelectItem>
         </SelectContent>
       </Select>
       <div
@@ -189,14 +188,16 @@ export function Chat({ chatId }: ChatProps) {
             )}
             <AlertDescription className="flex justify-between">
               <div>{i.message}</div>
-              {(i.isBot && index === chatInteractions.length -1) && !(latestCommand === '/opponent') && (
-                <div className="flex gap-2">
-                  <Button
-                    onClick={() => onAskQuestion(latestCommand)}
-                    variant="ghost"
-                  >
-                    <RedoIcon className="h-4 w-4" />
-                  </Button>
+              {i.isBot &&
+                index === chatInteractions.length - 1 &&
+                !(latestCommand === "/opponent") && (
+                  <div className="flex gap-2">
+                    <Button
+                      onClick={() => onAskQuestion(latestCommand)}
+                      variant="ghost"
+                    >
+                      <RedoIcon className="h-4 w-4" />
+                    </Button>
                   </div>
                 )}
             </AlertDescription>

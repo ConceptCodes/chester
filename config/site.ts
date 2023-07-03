@@ -3,7 +3,7 @@ export type SiteConfig = typeof siteConfig
 export const siteConfig = {
   name: "Chester",
   description:
-    "Beautifully designed components built with Radix UI and Tailwind CSS.",
+    "Chester is an advanced AI-powered chess tutor designed to take your chess skills to the next level. With personalized guidance, interactive lessons, and intelligent analysis, Chester empowers you to enhance your strategic thinking, sharpen your tactics, and elevate your overall performance on the chessboard.",
   mainNav: [
     {
       title: "Home",
@@ -11,8 +11,7 @@ export const siteConfig = {
     },
   ],
   links: {
-    twitter: "https://twitter.com/shadcn",
-    github: "https://github.com/shadcn/ui",
-    docs: "https://ui.shadcn.com",
+    github: "https://github.com/conceptcodes/chester",
+    article: "https://blogr.conceptcodes.dev/how-built-an-ai-chess-tutor",
   },
 }

@@ -1,7 +1,9 @@
 "use client"
 
 import Link from "next/link"
+import useStore from "@/store/useStore"
 
+import { siteConfig } from "@/config/site"
 import { Button } from "@/components/ui/button"
 import {
   Dialog,
@@ -13,7 +15,6 @@ import {
 } from "@/components/ui/dialog"
 import { Chat } from "@/components/chat"
 import Chessboard from "@/components/chessboard"
-import useStore from "@/store/useStore"
 
 export default function IndexPage() {
   const { clearStore } = useStore()
@@ -30,7 +31,7 @@ export default function IndexPage() {
       </div>
       <div className="flex gap-4">
         <Button onClick={clearStore}>
-          <Link target="_blank" href="https://blogr.conceptcodes.dev/chester">
+          <Link target="_blank" href={siteConfig.links.article}>
             Learn More
           </Link>
         </Button>
@@ -46,9 +47,9 @@ export default function IndexPage() {
                   <div className="mt-2">
                     <ul className="list-inside list-disc space-y-6 text-sm text-gray-700">
                       <li>
-                        <strong className="text-green-500">/breakdown:</strong> As
-                        a chess coach, I'll provide a detailed breakdown of the
-                        current state of the chess game, considering the
+                        <strong className="text-green-500">/breakdown:</strong>{" "}
+                        As a chess coach, I'll provide a detailed breakdown of
+                        the current state of the chess game, considering the
                         positions of the pieces, potential threats, and tactical
                         opportunities. For this command, I'll be coaching for
                         the white pieces.
@@ -61,7 +62,9 @@ export default function IndexPage() {
                         move.
                       </li>
                       <li>
-                        <strong className="text-orange-500">/mind-reader:</strong>{" "}
+                        <strong className="text-orange-500">
+                          /mind-reader:
+                        </strong>{" "}
                         In this mode, I'll think like the player and plan out
                         the next three moves. Each move and its reasoning will
                         be explained.
