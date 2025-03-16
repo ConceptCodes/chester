@@ -181,9 +181,9 @@ export function Chat({ chatId }: ChatProps) {
         {chatInteractions.map((i, index) => (
           <Alert key={index} className={cn(highlightCommand(i.message))}>
             {i.isBot ? (
-              <Bot className="h-4 w-4" />
+              <Bot className="size-4" />
             ) : (
-              <UserIcon className="h-4 w-4" />
+              <UserIcon className="size-4" />
             )}
             <AlertDescription className="flex justify-between">
               <div>{i.message}</div>
@@ -195,7 +195,7 @@ export function Chat({ chatId }: ChatProps) {
                       onClick={() => onAskQuestion(latestCommand)}
                       variant="ghost"
                     >
-                      <RedoIcon className="h-4 w-4" />
+                      <RedoIcon className="size-4" />
                     </Button>
                   </div>
                 )}
@@ -205,7 +205,7 @@ export function Chat({ chatId }: ChatProps) {
 
         {processing && (
           <Alert key="processing" className="animate-pulse">
-            <Bot className="h-4 w-4" />
+            <Bot className="size-4" />
             <AlertDescription>...</AlertDescription>
           </Alert>
         )}
@@ -240,7 +240,7 @@ export function Chat({ chatId }: ChatProps) {
             disabled={processing || !elo || aiPlay}
             className="min-w-[80px]"
           >
-            {processing ? <Loader2 className="h-4 w-4 animate-spin" /> : "Ask"}
+            {processing ? <Loader2 className="size-4 animate-spin" /> : "Ask"}
           </Button>
         </form>
       </Form>
