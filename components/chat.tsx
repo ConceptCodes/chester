@@ -143,11 +143,10 @@ export function Chat({ chatId }: ChatProps) {
 
   const onSubmit = async (data: z.infer<typeof formSchema>) => {
     setLatestCommand(data.request)
-    console.log(latestCommand)
     await onAskQuestion(data.request)
   }
 
-  const hightlightCommand = (command: string) => {
+  const highlightCommand = (command: string) => {
     switch (command) {
       case "/coach":
         return "text-red-500 font-medium"
@@ -180,7 +179,7 @@ export function Chat({ chatId }: ChatProps) {
         className="flex h-[450px] flex-col gap-2 overflow-scroll rounded-lg bg-secondary p-2"
       >
         {chatInteractions.map((i, index) => (
-          <Alert key={index} className={cn(hightlightCommand(i.message))}>
+          <Alert key={index} className={cn(highlightCommand(i.message))}>
             {i.isBot ? (
               <Bot className="h-4 w-4" />
             ) : (

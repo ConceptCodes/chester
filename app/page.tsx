@@ -26,7 +26,7 @@ export default function IndexPage() {
           Hello, Im Chester
         </h1>
         <p className="max-w-[700px] text-lg text-muted-foreground sm:text-xl">
-          I am a AI bot designed to help you get better at chess.
+          I am an AI bot designed to help you get better at chess.
         </p>
       </div>
       <div className="flex gap-4">
@@ -45,33 +45,33 @@ export default function IndexPage() {
               <DialogDescription>
                 <div className="text-center sm:text-left">
                   <div className="mt-2">
-                    <ul className="list-inside list-disc space-y-6 text-sm text-gray-700">
+                    <ul className="list-inside list-disc space-y-6 text-sm text-gray-700 dark:text-gray-300">
                       <li>
                         <strong className="text-green-500">/breakdown:</strong>{" "}
-                        As a chess coach, I'll provide a detailed breakdown of
+                        As a chess coach, I&apos;ll provide a detailed breakdown of
                         the current state of the chess game, considering the
                         positions of the pieces, potential threats, and tactical
-                        opportunities. For this command, I'll be coaching for
+                        opportunities. For this command, I&apos;ll be coaching for
                         the white pieces.
                       </li>
                       <li>
                         <strong className="text-blue-500">/next-move:</strong>{" "}
-                        I'll scrutinize the present situation on the board and
+                        I&apos;ll scrutinize the present situation on the board and
                         suggest the most advantageous next move for the white
-                        player. I'll explain the reasoning behind the suggested
+                        player. I&apos;ll explain the reasoning behind the suggested
                         move.
                       </li>
                       <li>
                         <strong className="text-orange-500">
                           /mind-reader:
                         </strong>{" "}
-                        In this mode, I'll think like the player and plan out
+                        In this mode, I&apos;ll think like the player and plan out
                         the next three moves. Each move and its reasoning will
                         be explained.
                       </li>
                       <li>
                         <strong className="text-red-500">/coach:</strong> Here,
-                        I'll find the best possible move for the black player
+                        I&apos;ll find the best possible move for the black player
                         and explain the thought process behind the decision.
                       </li>
                     </ul>

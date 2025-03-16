@@ -27,16 +27,16 @@ print(df['Result'][0])
 
 # Training data will look like this
 
-def generateAnalyse(elo, pgn, fen):
+def generateAnalysis(elo, pgn, fen):
     tmp = "As a seasoned chess tutor with an ELO rating of {elo}, it's my job to provide a detailed breakdown of the current state of this chess game."
-    tmp+= "I'll carefully analyze the positions of the pieces, evaluate potential threats, and identify any tactical opportunities." 
+    tmp += "I'll carefully analyze the positions of the pieces, evaluate potential threats, and identify any tactical opportunities." 
     tmp +=   "My breakdown will offer valuable insights into the strategic aspects of the game, helping both players understand the dynamics on the chessboard." 
-    tmp+= "The current PGN is {pgn}."
-    tmp+= "Then current FEN is {fen}."
+    tmp += "The current PGN is {pgn}."
+    tmp += "Then current FEN is {fen}."
     tmp += "Please don't give any advice on the next move. "
     tmp += "Just evaluate the current state of the game and what observations you can make. "
     tmp += "Be as objective as possible. If you think one player has an advantage, explain why."
     tmp += "If you cannot determine who has the advantage, explain why."
-    tmp += "If you cannot make a descion, then dont make one."
+    tmp += "If you cannot make a decision, then dont make one."
 
     return tmp.format(elo=elo, pgn=pgn, fen=fen)

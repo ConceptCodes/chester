@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react"
 import useStore from "@/store/useStore"
 import { Chess } from "chess.js"
 import Chessboard from "chessboardjsx"
+import { Button } from "./ui/button"
 
 const ChessGame = () => {
   const { setAiPlay, nextMove, setNextMove, setBoard, setValidMoves } = useStore()
